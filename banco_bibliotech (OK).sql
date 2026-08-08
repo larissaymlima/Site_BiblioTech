@@ -190,4 +190,7 @@ INSERT INTO emprestimos (id_exemplar, id_leitor, id_funcionario) VALUES
 (4, 1, 2), -- Exemplar 4 para Leitor 1, registrado pelo Funcionario 2
 (7, 1, 1), -- Exemplar 7 para Leitor 1, registrado pelo Funcionario 1
 (11, 1, 2);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9d89e18 (Adiciona app.py, estrutura de pastas e rotas de login/cadastro)
