@@ -153,12 +153,12 @@ INSERT INTO categorias (nome_categoria) VALUES
 -- Inserindo Funcionário 
 INSERT INTO funcionarios (nome, id_cargo, email, telefone, sms, senha, tipo_perfil) VALUES
 ('Carlos Silva', 1, 'carlos@bliblitech.com', '11999998888', '11999998888', 'B123', 'Funcionário'),
-('Rebeca Monteiro', 2, 'becca@biblitech.com', '31972321537', '31972321537', 'B456', 'Funcionário');
+('Isabela Matos', 2, 'isa@biblitech.com', '31972321537', '31972321537', 'B456', 'Funcionário');
+
 -- Inserindo Leitor
 INSERT INTO leitores (nome, email, telefone, sms, senha) VALUES 
 ('Felipe Rios', 'ana@gmail.com', '11977776666', '11977776666', 'L123'),
-('Ana Souza', 'fr@gmail.com', '31971165397', '31971165397', 'L456');
- 
+('Larissa Matias', 'ly@gmail.com', '31971165397', '31971165397', 'L456');
  
 -- Inserindo Livro e seus Exemplares
 INSERT INTO livro (titulo, autor, ano_publicacao, quant_estoque) VALUES
@@ -227,4 +227,3 @@ INSERT INTO emprestimos (id_exemplar, id_leitor, id_funcionario) VALUES
 INSERT INTO reservas (id_livro, id_leitor) VALUES 
 (1, 2), -- Leitor 2 reservou o Livro 1
 (4, 2); -- Leitor 2 reservou o Livro 4
-
