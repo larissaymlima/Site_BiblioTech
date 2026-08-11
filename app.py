@@ -25,3 +25,28 @@ app.config['SESSION_COOKIE_SECURE'] = True if os.getenv('FLASK_ENV') == 'product
 app.config['SESSION_COOKIE_HTTPONLY'] = True   # JS não consegue ler o cookie (proteção XSS)
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # Proteção básica contra CSRF via cookie
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=8)  # Sessão expira após 8h
+
+ALLOWED_PHOTO_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
+
+def allowed_photo(filename):
+    if not filename:
+        return False
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_PHOTO_EXTENSIONS
+
+def save_profile_photo(file, user_id):
+    extensao = file.filename.rsplit('.', 1)[1].lower()
+    filename = f"perfil_{user_id}.{extensao}"
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file.save(path)
+    return filename
+
+def validar_complexidade_senha(senha):
+    if len(senha) < 8:
+        return False, "A senha deve ter pelo menos 8 caracteres."
+    if not re.search(r"[A-Za-z]", senha) or not re.search(r"\d", senha):
+        return False, "A senha deve conter pelo menos uma letra e um numero."
+    return True, ""
+
+    # --- CONFIGURAÇÃO DAS PASTAS ESTÁTICAS ---
+ASSETS_FOLDER = os.path.join(app.root_path, 'assets')
+CSS_FOLDER = os.path.join(app.root_path, 'css')
