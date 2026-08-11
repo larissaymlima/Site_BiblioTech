@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -169,4 +170,177 @@
         <p>@ 2026 Bibliotech Todos os direitos reservados.</p>
     </footer>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('serve_css', filename='style.css') }}">
+    <title>Bibliotech</title>
+</head>
+<body>
+    <header class="cabeçalho">
+        <section>
+            <h1>Bibliotech</h1>
+            <nav class="navbar">
+                <a href="#Inicío">Inicío</a>
+                <a href="#Sobre-nos">Sobre nos</a>
+                <a href="#Reservar-Agora" class="btn-reserva">Reservar agora</a>
+                <a href="#Suporte">Suporte</a>
+                <a href="#Catálogo">Catálogo</a>
+            </nav>
+            <div class="icons">
+                <img width="64" height="64" src="https://img.icons8.com/pastel-glyph/64/search--v1.png" alt="search--v1"/>
+                <img width="64" height="64" src="https://img.icons8.com/wired/64/shopping-cart--v1.png" alt="shopping-cart--v1"/>
+            </div>
+        </section>
+    </header>
+
+    <main class="Inicío-container" id="Inicío">
+        <div class="Inicío-content">
+            <h2>Sua biblioteca digital completa: explore nosso acervo e reserve seu próximo livro agora mesmo.</h2>
+            <p>Conectamos você aos maiores clássicos da literatura mundial e aos lançamentos mais aguardados do mercado. Com a Bibliotech, você navega por um catálogo dinâmico, garante seus exemplares em instantes com total segurança e otimiza seu tempo sem encarar filas. Esqueça a burocracia: tenha uma biblioteca completa, intuitiva e moderna na palma da sua mão, pronta para acompanhar o seu ritmo onde quer que você esteja.</p>
+            <a href="#" class="btn">Saiba Mais</a>
+        </div>
+        <div class="Inicío-imagem">
+            <img src="{{ url_for('serve_assets', filename='Biblioteca.jpg') }}" alt="Imagem da biblioteca">
+        </div>
+    </main>
+
+    <section class="Sobre-nos" id="Sobre-nos">
+        <h2 class="Title">Sobre<span> nós</span></h2>
+        <div class="row">
+          <div class="Sobre-nos-imagem">
+            <img src="{{ url_for('serve_assets', filename='livros.jpg') }}" alt="Imagem de livros">
+          </div>
+          <div class="content">
+            <h3>Bem vindo a sua biblioteca digital</h3>
+            <p>Somos mais do que um sistema de reservas: somos um ponto de encontro para quem ama a leitura. A Bibliotech unifica praticidade e tecnologia para que você possa explorar catálogos, descobrir novos títulos e garantir seus exemplares com rapidez. Nosso compromisso é transformar a experiência de frequentar a biblioteca em algo ágil, acolhedor e totalmente adaptado à sua rotina.</p>
+            <a href="#" class="btn">Ver Catálogo</a>
+          </div>
+        </div>
+    </section>
+
+    <section class="acervo" id="Acervo">
+        <h2 class="Title">Catalogos <span>em alta</span></h2>
+        <div class="box-container">
+            <div class="box">
+                <div class="box-img">
+                    <img src="{{ url_for('serve_assets', filename='classicos.jpg') }}" alt="Grandes Clássicos">
+                </div>
+                <div class="box-content">
+                    <h3>Grandes Clássicos</h3>
+                    <p>Obras atemporais e consagradas da literatura mundial.</p>
+                    <a href="#" class="btn">Reservar</a>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-img">
+                    <img src="{{ url_for('serve_assets', filename='ficção cientifíca.jpg') }}" alt="Ficção & Fantasia">
+                </div>
+                <div class="box-content">
+                    <h3>Ficção & Fantasia</h3>
+                    <p>Histórias envolventes, universos fantásticos e ficção científica.</p>
+                    <a href="#" class="btn">Reservar</a>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-img">
+                    <img src="{{ url_for('serve_assets', filename='suspense e thriller.jpg') }}" alt="Suspense & Thriller">
+                </div>
+                <div class="box-content">
+                    <h3>Suspense & Thriller</h3>
+                    <p>Romances policiais, investigações e histórias de alta tensão.</p>
+                    <a href="#" class="btn">Reservar</a>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-img">
+                    <img src="{{ url_for('serve_assets', filename='romance.jpg') }}" alt="Romance & Drama">
+                </div>
+                <div class="box-content">
+                    <h3>Romance & Drama</h3>
+                    <p>Narrativas emocionais, relacionamentos e dramas marcantes.</p>
+                    <a href="#" class="btn">Reservar</a>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-img">
+                    <img src="{{ url_for('serve_assets', filename='tecnologia e ciencia.jpg') }}" alt="Tecnologia & Ciência">
+                </div>
+                <div class="box-content">
+                    <h3>Tecnologia & Ciência</h3>
+                    <p>Obras sobre programação, inovação e inteligência artificial.</p>
+                    <a href="#" class="btn">Reservar</a>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-img">
+                    <img src="{{ url_for('serve_assets', filename='desenvolvimento pessoal.jpg') }}" alt="Desenvolvimento Pessoal">
+                </div>
+                <div class="box-content">
+                    <h3>Desenvolvimento Pessoal</h3>
+                    <p>Livros de produtividade, carreira e inteligência emocional.</p>
+                    <a href="#" class="btn">Reservar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="Review" id="Review">
+        <h2 class="Title"><span>Nossos </span>Clientes</h2>
+        <div class="box-container">
+            <div class="box">
+                <img class="quote-icon" src="{{ url_for('serve_assets', filename='icons8-quote-50.png') }}" alt="quote">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere, modi et iste natus rem obcaecati? Assumenda doloribus sunt placeat repellat et? Corporis temporibus pariatur modi eveniet inventore architecto nobis suscipit.</p>
+                <img class="avatar" src="{{ url_for('serve_assets', filename='pessoa1.png') }}" alt="foto-cliente">
+                <h3>Carlos Oeste</h3>
+                <div class="stars">
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                </div>
+            </div>
+            <div class="box">
+                <img class="quote-icon" src="{{ url_for('serve_assets', filename='icons8-quote-50.png') }}" alt="quote">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere, modi et iste natus rem obcaecati? Assumenda doloribus sunt placeat repellat et? Corporis temporibus pariatur modi eveniet inventore architecto nobis suscipit.</p>
+                <img class="avatar" src="{{ url_for('serve_assets', filename='pessoa2.jpg') }}" alt="foto-cliente">
+                <h3>João da Inestam</h3>
+                <div class="stars">
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star-half-empty.png" alt="star-half-empty"/>
+                </div>
+            </div>
+            <div class="box">
+                <img class="quote-icon" src="{{ url_for('serve_assets', filename='icons8-quote-50.png') }}" alt="quote">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere, modi et iste natus rem obcaecati? Assumenda doloribus sunt placeat repellat et? Corporis temporibus pariatur modi eveniet inventore architecto nobis suscipit.</p>
+                <img class="avatar" src="{{ url_for('serve_assets', filename='pessoa3.jpg') }}" alt="foto-cliente">
+                <h3>Marcos Alonso</h3>
+                <div class="stars">
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                    <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/star.png" alt="star"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="share">
+            <img src="{{ url_for('serve_assets', filename='facebook.png') }}" alt="facebook">
+            <img src="{{ url_for('serve_assets', filename='instagram.png') }}" alt="instagram">
+            <img src="{{ url_for('serve_assets', filename='github.gif') }}" alt="github">
+            <img src="{{ url_for('serve_assets', filename='whatsaap.png') }}" alt="whatsapp">
+        </div>
+        <p>@ 2026 Bibliotech Todos os direitos reservados.</p>
+    </footer>
+</body>
+>>>>>>> b327d0ab63907dfde0f05246031888ebd7cd73e0
 </html>
