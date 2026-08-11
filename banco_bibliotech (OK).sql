@@ -509,4 +509,4 @@ INSERT INTO avaliacoes (livro_id, leitor_id, nota, comentario, data_avaliacao) V
 (68, 2, 4, 'Exploração de continentes desconhecidos, perigos e tesouros lendários no melhor estilo clássico.', '2026-04-09 10:05:00'),
 (69, 1, 5, 'A obsessão humana levada ao extremo. Uma obra épica, profunda e cheia de simbolismos.', '2026-04-10 19:00:00'),
 (70, 3, 4, 'Um clássico sobre sobrevivência, engenhosidade e solidão em uma ilha deserta.', '2026-04-11 12:30:00');
->>>>>>> b327d0ab63907dfde0f05246031888ebd7cd73e0
+
