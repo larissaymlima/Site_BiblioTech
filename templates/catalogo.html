@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo da Biblioteca - Acervo</title>
+    <!-- Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+    <!-- Cabeçalho -->
+    <header class="bg-indigo-900 text-white shadow-md">
+        <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-2xl font-bold flex items-center gap-2">
+                <i class="fa-solid fa-book-open"></i> Biblioteca Virtual
+            </h1>
+            <nav class="mt-4 md:mt-0 flex gap-6 text-sm font-medium">
+                <a href="home.html" class="hover:text-indigo-300 transition">Início</a>
+                <a href="#catalogo" class="hover:text-indigo-300 transition">Catálogo</a>
+                <a href="#destaques" class="hover:text-indigo-300 transition">Destaques</a>
+                <a href="#" class="hover:text-indigo-300 transition">Minhas Reservas</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container mx-auto px-4 py-8 space-y-12">
+
+        <!-- Seção de Filtros e Busca -->
+        <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h2 class="text-lg font-semibold mb-4 text-slate-700">Encontre seu próximo livro</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Título ou Autor</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-search absolute left-3 top-3.5 text-slate-400"></i>
+                        <input type="text" placeholder="Digite o que procura..." class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Categoria</label>
+                    <select class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                        <option value="">Todas as categorias</option>
+                        <option value="ficcao">Ficção Científica</option>
+                        <option value="romance">Romance</option>
+                        <option value="historia">História</option>
+                        <option value="tecnologia">Tecnologia</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Disponibilidade</label>
+                    <select class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                        <option value="">Todos</option>
+                        <option value="disponivel">Disponível para empréstimo</option>
+                        <option value="reservado">Indisponível / Reservado</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Destaques (Carrosséis: Mais Avaliados, Mais Reservados, Lançamentos) -->
+        <section id="destaques" class="space-y-8">
+            
+            <!-- 5 Mais Avaliados -->
+            <div>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-star text-amber-500"></i> Os 5 Mais Avaliados
+                    </h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+                    <!-- Repetir 5 vezes -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-slate-200 h-40 rounded-lg mb-3 flex items-center justify-center text-slate-400 font-medium">Capa</div>
+                            <h4 class="font-bold text-sm line-clamp-1">Título do Livro Nota 5</h4>
+                            <p class="text-xs text-slate-500">Autor Famoso</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold"><i class="fa-solid fa-star"></i> 4.9</span>
+                            <button class="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded hover:bg-indigo-700 transition">Detalhes</button>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-slate-200 h-40 rounded-lg mb-3 flex items-center justify-center text-slate-400 font-medium">Capa</div>
+                            <h4 class="font-bold text-sm line-clamp-1">A Metamorfose</h4>
+                            <p class="text-xs text-slate-500">Franz Kafka</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold"><i class="fa-solid fa-star"></i> 4.8</span>
+                            <button class="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded hover:bg-indigo-700 transition">Detalhes</button>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-slate-200 h-40 rounded-lg mb-3 flex items-center justify-center text-slate-400 font-medium">Capa</div>
+                            <h4 class="font-bold text-sm line-clamp-1">1984</h4>
+                            <p class="text-xs text-slate-500">George Orwell</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold"><i class="fa-solid fa-star"></i> 4.8</span>
+                            <button class="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded hover:bg-indigo-700 transition">Detalhes</button>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-slate-200 h-40 rounded-lg mb-3 flex items-center justify-center text-slate-400 font-medium">Capa</div>
+                            <h4 class="font-bold text-sm line-clamp-1">Dom Casmurro</h4>
+                            <p class="text-xs text-slate-500">Machado de Assis</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold"><i class="fa-solid fa-star"></i> 4.7</span>
+                            <button class="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded hover:bg-indigo-700 transition">Detalhes</button>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-slate-200 h-40 rounded-lg mb-3 flex items-center justify-center text-slate-400 font-medium">Capa</div>
+                            <h4 class="font-bold text-sm line-clamp-1">O Pequeno Príncipe</h4>
+                            <p class="text-xs text-slate-500">Antoine de Saint-Exupéry</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded font-semibold"><i class="fa-solid fa-star"></i> 4.7</span>
+                            <button class="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded hover:bg-indigo-700 transition">Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 Mais Reservados -->
+            <div>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-fire text-orange-500"></i> Os 5 Mais Reservados
+                    </h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+                    <!-- Estrutura repetida para os 5 mais reservados -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-slate-200 h-40 rounded-lg mb-3 flex items-center justify-center text-slate-400 font-medium">Capa</div>
+                            <h4 class="font-bold text-sm line-clamp-1">Harry Potter e a Pedra Filosofal</h4>
+                            <p class="text-xs text-slate-500">J.K. Rowling</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded font-semibold">120 reservas</span>
+                            <button class="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded hover:bg-indigo-700 transition">Reservar</button>
+                        </div>
+                    </div>
+                    <!-- Repetir demais itens conforme necessário -->
+                </div>
+            </div>
+
+            <!-- 5 Lançamentos -->
+            <div>
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-sparkles text-indigo-500"></i> Lançamentos Recentes
+                    </h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-slate-200 h-40 rounded-lg mb-3 flex items-center justify-center text-slate-400 font-medium">Capa</div>
+                            <h4 class="font-bold text-sm line-clamp-1">Inovação e Futuro 2026</h4>
+                            <p class="text-xs text-slate-500">Tech Editora</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-semibold">Novo</span>
+                            <button class="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded hover:bg-indigo-700 transition">Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Acervo Completo com Paginação -->
+        <section id="catalogo" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h3 class="text-xl font-bold text-slate-800 mb-6">Acervo Completo</h3>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-xs uppercase text-slate-400 font-semibold">
+                            <th class="py-3 px-4">Título</th>
+                            <th class="py-3 px-4">Autor</th>
+                            <th class="py-3 px-4">Categoria</th>
+                            <th class="py-3 px-4">Status</th>
+                            <th class="py-3 px-4 text-right">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm">
+                        <tr>
+                            <td class="py-3 px-4 font-medium text-slate-800">O Senhor dos Anéis</td>
+                            <td class="py-3 px-4 text-slate-600">J.R.R. Tolkien</td>
+                            <td class="py-3 px-4 text-slate-600">Fantasia</td>
+                            <td class="py-3 px-4"><span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded font-medium">Disponível</span></td>
+                            <td class="py-3 px-4 text-right">
+                                <button class="text-indigo-600 hover:underline text-xs font-semibold">Solicitar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-medium text-slate-800">Breves Respostas às Grandes Perguntas</td>
+                            <td class="py-3 px-4 text-slate-600">Stephen Hawking</td>
+                            <td class="py-3 px-4 text-slate-600">Ciência</td>
+                            <td class="py-3 px-4"><span class="bg-rose-100 text-rose-800 text-xs px-2 py-1 rounded font-medium">Emprestado</span></td>
+                            <td class="py-3 px-4 text-right">
+                                <button class="text-indigo-600 hover:underline text-xs font-semibold">Reservar Fila</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginação -->
+            <div class="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4">
+                <span class="text-xs text-slate-500">Mostrando 1 a 10 de 145 resultados</span>
+                <div class="flex items-center gap-1">
+                    <button class="px-3 py-1.5 border border-slate-300 rounded-lg text-slate-500 hover:bg-slate-100 text-xs disabled:opacity-50" disabled>Anterior</button>
+                    <button class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs font-medium">1</button>
+                    <button class="px-3 py-1.5 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-100 text-xs">2</button>
+                    <button class="px-3 py-1.5 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-100 text-xs">3</button>
+                    <span class="px-2 text-slate-400">...</span>
+                    <button class="px-3 py-1.5 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-100 text-xs">15</button>
+                    <button class="px-3 py-1.5 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-100 text-xs">Próxima</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-12 text-center text-sm">
+        <p>&copy; 2026 Biblioteca Virtual. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

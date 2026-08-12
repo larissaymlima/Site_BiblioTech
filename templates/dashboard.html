@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Dashboard - Bibliotech</title>
+</head>
+<body class="bg-slate-100 flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-indigo-900 text-white p-6">
+        <h2 class="text-xl font-bold mb-8">Painel Bibliotech</h2>
+        <nav class="space-y-4">
+            <a href="#" class="block py-2 px-4 rounded bg-indigo-800"><i class="fa-solid fa-gauge mr-2"></i> Dashboard</a>
+            
+            <!-- Acesso Restrito ao Bibliotecário -->
+            {% if current_user.role == 'bibliotecario' %}
+            <a href="#" class="block py-2 px-4 hover:bg-indigo-800"><i class="fa-solid fa-plus mr-2"></i> Cadastrar Livro</a>
+            <a href="#" class="block py-2 px-4 hover:bg-indigo-800"><i class="fa-solid fa-pen mr-2"></i> Gerenciar Acervo</a>
+            {% endif %}
+
+            <!-- Acesso liberado para ambos -->
+            <a href="#" class="block py-2 px-4 hover:bg-indigo-800"><i class="fa-solid fa-arrow-down mr-2"></i> Dar Baixa (Empréstimo)</a>
+        </nav>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-1 p-8">
+        <h1 class="text-2xl font-bold text-slate-800 mb-6">Controle de Acervo</h1>
+
+        <!-- Tabela de Livros -->
+        <div class="bg-white p-6 rounded-lg shadow-sm">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b text-slate-400 text-sm">
+                        <th class="pb-3">Título</th>
+                        <th class="pb-3">Status</th>
+                        <th class="pb-3 text-right">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm">
+                    <tr class="border-b">
+                        <td class="py-4">O Senhor dos Anéis</td>
+                        <td class="py-4 text-emerald-600 font-medium">Disponível</td>
+                        <td class="py-4 text-right space-x-2">
+                            <!-- Botões de Baixa (Para todos) -->
+                            <button class="bg-emerald-600 text-white px-3 py-1 rounded text-xs hover:bg-emerald-700">Dar Baixa</button>
+                            
+                            <!-- Botões Restritos ao Bibliotecário -->
+                            {% if current_user.role == 'bibliotecario' %}
+                            <button class="bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700">Editar</button>
+                            <button class="bg-red-600 text-white px-3 py-1 rounded text-xs hover:bg-red-700">Excluir</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+</html>
