@@ -192,25 +192,6 @@ BEGIN
     END IF;
 END //
 
--- Impede que um leitor reserve um livro que já possui emprestado ativamente
-CREATE TRIGGER antes_inserir_reserva_duplicada_emprestimo
-BEFORE INSERT ON reservas
-FOR EACH ROW
-BEGIN
-    DECLARE v_possui_emprestimo INT;
-
-    SELECT COUNT(*) INTO v_possui_emprestimo
-    FROM emprestimos
-    WHERE id_leitor = NEW.id_leitor
-      AND id_livro = NEW.id_livro
-      AND data_devolucao_real IS NULL;
-
-    IF v_possui_emprestimo > 0 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Não é permitido reservar um livro que você já possui emprestado.';
-    END IF;
-END //
-
 DELIMITER ;
 
 -- -----------------------------------------------------------------------------
@@ -233,14 +214,10 @@ INSERT INTO funcionarios (nome, id_cargo, email, telefone, senha, tipo_perfil) V
 ('Carlos Silva', 1, 'carlos@bliblitech.com', '11999998888', 'scrypt:32768:8:1$nPV45UkwdKmGkuRe$103d1d7ce6706f2ae5d64800ada5fc3bbb6a0114567481f85af73e69d98ccc8172f07a2fa57aabe15d31faac773b316a5fa3ccac986171434a53252a0cc2d953', 'FUNCIONARIO'),
 ('Isabela Matos', 2, 'isa@biblitech.com', '31972321537', 'scrypt:32768:8:1$OTqIGW9yfBYMKEpb$2b3247c4e557751ded9e19b4729e43a86d68f9a84ccb3f74043581a15292c95209f50961c80f9d7c1081d264a97270413b308a58edaa991b4640aeebe05e03e2', 'FUNCIONARIO');
 
--- Diversificação dos leitores (IDs de 1 a 6)
-INSERT INTO leitores (id_leitor, nome, email, telefone, senha, tipo_perfil, consentimento_lgpd) VALUES 
-(1, 'Felipe Rios', 'felipe@gmail.com', '11977776666', 'scrypt:32768:8:1$4FMnn5lwlsz1hrz9$2d5a1d34307e245c2d5bdaef340b8cd1bc8ba2dbda7b2fae2f1bfcde0b6ac278615c9675890bd7630793be2c845f43a62c3d0850d4ca1563e0e71686f7969057', 'LEITOR', 1),
-(2, 'Larissa Matias', 'ly@gmail.com', '31971165397', 'scrypt:32768:8:1$OTqIGW9yfBYMKEpb$2b3247c4e557751ded9e19b4729e43a86d68f9a84ccb3f74043581a15292c95209f50961c80f9d7c1081d264a97270413b308a58edaa991b4640aeebe05e03e2', 'LEITOR', 1),
-(3, 'Amanda Souza', 'amanda@gmail.com', '31988887777', 'scrypt:32768:8:1$oAUiGU9RllBjYHOC$6c8e736c5fcc18bfaf9b6aa61e8692296c8712eec9002fa27e764ae7820d7b4e81c8dd9be06c40005bfc9586d67e9b50f6ab0a1394ccda4b14120645fe6abf0b', 'LEITOR', 1),
-(4, 'Carlos Eduardo', 'carlos.eduardo@email.com', '31988880001', 'scrypt:32768:8:1$hash1', 'LEITOR', 1),
-(5, 'Mariana Lima', 'mariana.lima@email.com', '31988880002', 'scrypt:32768:8:1$hash2', 'LEITOR', 1),
-(6, 'Lucas Souza', 'lucas.souza@email.com', '31988880003', 'scrypt:32768:8:1$hash3', 'LEITOR', 1);
+INSERT INTO leitores (nome, email, telefone, senha, tipo_perfil, consentimento_lgpd) VALUES 
+('Felipe Rios', 'felipe@gmail.com', '11977776666', 'scrypt:32768:8:1$4FMnn5lwlsz1hrz9$2d5a1d34307e245c2d5bdaef340b8cd1bc8ba2dbda7b2fae2f1bfcde0b6ac278615c9675890bd7630793be2c845f43a62c3d0850d4ca1563e0e71686f7969057', 'LEITOR', 1),
+('Larissa Matias', 'ly@gmail.com', '31971165397', 'scrypt:32768:8:1$OTqIGW9yfBYMKEpb$2b3247c4e557751ded9e19b4729e43a86d68f9a84ccb3f74043581a15292c95209f50961c80f9d7c1081d264a97270413b308a58edaa991b4640aeebe05e03e2', 'LEITOR', 1),
+('Amanda Souza', 'amanda@gmail.com', '31988887777', 'scrypt:32768:8:1$oAUiGU9RllBjYHOC$6c8e736c5fcc18bfaf9b6aa61e8692296c8712eec9002fa27e764ae7820d7b4e81c8dd9be06c40005bfc9586d67e9b50f6ab0a1394ccda4b14120645fe6abf0b', 'LEITOR', 1);
 
 INSERT INTO livro (id_livro, titulo, autor, ano_publicacao, quant_estoque, id_categoria, posicao_estante, cadastro) VALUES
 (1, 'O Hobbit', 'J.R.R. Tolkien', 1937, 2, 1, 'Corredor A - Estante 1', '2026-01-11 10:00:00'),
@@ -272,47 +249,33 @@ INSERT INTO livro (id_livro, titulo, autor, ano_publicacao, quant_estoque, id_ca
 (27, 'Sniper Americano', 'Chris Kyle', 2012, 2, 4, 'Corredor D - Estante 3', '2026-02-19 10:00:00');
 
 -- -----------------------------------------------------------------------------
--- 🔄 EMPRÉSTIMOS REESTRUTURADOS
+-- 🔄 EMPRÉSTIMOS (MÁXIMO 3 POR LEITOR)
 -- -----------------------------------------------------------------------------
-
--- Leitor 1 (Felipe): Atinge o limite máximo de 3 empréstimos ativos (Livros 18, 19, 23)
--- Leitor 2 (Larissa): 2 empréstimos ativos (Livros 18 e 20) -> Pode fazer +1 empréstimo
--- Leitor 3 (Amanda): 1 empréstimo ativo (Livro 19) -> Pode fazer +2 empréstimos
--- Leitor 4 (Carlos): 1 empréstimo ativo (Livro 20) -> Pode fazer +2 empréstimos
--- Leitores 5 e 6: 0 empréstimos ativos -> Elegíveis para até 3 empréstimos
-
--- Livros 18, 19 e 20: Totalmente sem estoque (2 empréstimos de 2 disponíveis)
--- Livro 23: Estoque parcial (1 emprestado de 2 disponíveis)
--- Demais livros: 100% disponíveis na estante
-
 INSERT INTO emprestimos (id_livro, id_leitor, id_funcionario, data_devolucao_prevista) VALUES
--- Livro 18 esgotado (Leitores 1 e 2)
+-- Livro 18 esgotado
 (18, 1, 1, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY)),
 (18, 2, 1, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY)),
 
--- Livro 19 esgotado (Leitores 1 e 3)
+-- Livro 19 esgotado
 (19, 1, 1, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY)),
 (19, 3, 1, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY)),
 
--- Livro 20 esgotado (Leitores 2 e 4)
+-- Livro 20 esgotado
 (20, 2, 1, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY)),
-(20, 4, 1, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY)),
+(20, 3, 1, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY)),
 
--- Livro 23 com estoque parcial (Leitor 1)
-(23, 1, 1, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY));
+-- Livro 23 esgotado
+(23, 1, 1, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY)),
+(23, 2, 1, DATE_ADD(CURRENT_DATE(), INTERVAL 14 DAY));
 
 -- -----------------------------------------------------------------------------
--- 📌 RESERVAS VALIDADAS
+-- 📌 RESERVAS
 -- -----------------------------------------------------------------------------
--- Reservas permitidas somente para livros 100% esgotados (18, 19, 20)
--- Os leitores que reservam NÃO possuem o livro emprestado no momento
-
 INSERT INTO reservas (id_leitor, id_livro, data_reserva, status_reserva) VALUES
-(3, 18, NOW(), 'Pendente'), -- Leitora 3 na fila do Livro 18 (esgotado)
-(4, 18, NOW(), 'Pendente'), -- Leitor 4 na fila do Livro 18 (2º da fila)
-(2, 19, NOW(), 'Pendente'), -- Leitora 2 na fila do Livro 19 (esgotado)
-(5, 20, NOW(), 'Pendente'); -- Leitora 5 na fila do Livro 20 (esgotado)
-
+(3, 18, NOW(), 'Pendente'),
+(3, 19, NOW(), 'Pendente'),
+(1, 20, NOW(), 'Pendente'),
+(2, 23, NOW(), 'Pendente');
 -- -----------------------------------------------------------------------------
 -- 💬 AVALIAÇÕES
 -- -----------------------------------------------------------------------------
